@@ -1,8 +1,11 @@
 # SynoSnap
-Backup snapshoting script for use on Synology NAS.
 
-## Dependancies
+## Overview
 
+SynoSnap is a backup snapshot maintaining script designed to have minimal enough requirements that it can run on a Synology NAS without the pain of installing ipkg.
+
+## Requirements
+ - Python 2.7+
  - [PyYAML](http://pyyaml.org/) used for YAML parsing.
 
 ## Usage
@@ -24,5 +27,6 @@ hourly: 0 # number of hourly snapshots to keep
 daily: 0 # number of daily snapshots to keep
 weekly: 0 # number of weekly snapshots to keep
 monthly: 0 # number of monthly snapshots to keep
-output: "" # path to output folder to store snapshots *required
+source: "" # path to folder generate snapshots of *required
+destination: "" # path to folder to store snapshots *required
 ```
