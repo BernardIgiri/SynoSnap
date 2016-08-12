@@ -18,7 +18,7 @@ class DryRunFileHandler(FileHandlerBase):
 		print "Move " + source + " to " + destination;
 	def copyFolder(source, destination):
 		print "Copy " + source + " to " + destination;
-	def touchFolder(folder):
+	def touchFolder(folder, time):
 		return
 
 class LiveFileHandler(FileHandlerBase):
@@ -36,5 +36,5 @@ class LiveFileHandler(FileHandlerBase):
 	def copyFolder(source, destination):
 		self.logger.copyFolder(source, destination)
 		os.system('cp -al "' + source + '" "' + destination + '"')
-	def touchFolder(folder):
-		os.system('touch "' + folder + "'")
+	def touchFolder(folder, time):
+		os.system('touch "' + folder + '" -t "' + time + '"')
