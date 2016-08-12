@@ -8,6 +8,7 @@ def main(arguments):
 	isDryRun   = False
 	for i in range(2, len(arguments)):
 		if arguments[i] == "--dry-run":
+			print "Dry run only, no files will be altered."
 			isDryRun = True
 	stream = file(configFile, 'r')
 	configuration = yaml.load(stream)
@@ -30,4 +31,5 @@ def main(arguments):
 	)
 	for period in timePeriods:
 		updater.process(period)
+	print "Finished."
 	return

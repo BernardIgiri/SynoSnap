@@ -22,11 +22,13 @@ class SnapshotUpdater:
 
 	def shiftFolders(self, periodFolder, numOfSnapshots):
 		entryFolder = self.getEntryFolder(periodFolder, numOfSnapshots -1)
-		self.fh.deleteFolder(entryFolder)
+		if self.fh.ifFolderExists(entryFolder):
+			self.fh.deleteFolder(entryFolder)
 		for i in range(numOfSnapshots, 0, -1):
 			entrySrc = self.getEntryFolder(periodFolder, i-1)
 			entryDest = self.getEntryFolder(periodFolder, i)
-			self.fh.moveFolder(entrySrc, entryDest)
+			if self.fh.ifFolderExists(entrySrc):
+				self.fh.moveFolder(entrySrc, entryDest)
 		self.copySource(periodFolder)
 
 	def getPeriodFolder(self, period):
