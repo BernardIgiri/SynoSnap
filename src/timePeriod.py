@@ -3,11 +3,11 @@ import datetime
 
 class TimePeriod:
 	def __init__(self):
-		this.numOfSnapshots = 0
-	def setNumOfSnapshots(numOfSnapshots):
-		this.numOfSnapshots = numOfSnapshots
-	def getNumOfSnapshots():
-		return this.numOfSnapshots
+		self.numOfSnapshots = 0
+	def setNumOfSnapshots(self, numOfSnapshots):
+		self.numOfSnapshots = numOfSnapshots
+	def getNumOfSnapshots(self):
+		return self.numOfSnapshots
 	@staticmethod
 	def getTimePeriods():
 		return [
@@ -18,25 +18,25 @@ class TimePeriod:
 		]
 
 class Hourly(TimePeriod):
-	def getPeriodInSeconds():
+	def getPeriodInSeconds(self):
 		return 3600;
-	def getName():
+	def getName(self):
 		return "hourly"
 
 class Daily(TimePeriod):
-	def getPeriodInSeconds():
+	def getPeriodInSeconds(self):
 		return 86400;
-	def getName():
+	def getName(self):
 		return "daily"
 
 class Weekly(TimePeriod):
-	def getPeriodInSeconds():
+	def getPeriodInSeconds(self):
 		return 604800;
-	def getName():
+	def getName(self):
 		return "weekly"
 
 class Monthly(TimePeriod):
-	def getPeriodInSeconds():
+	def getPeriodInSeconds(self):
 		return 2628000;
-	def getName():
+	def getName(self):
 		return "monthly"

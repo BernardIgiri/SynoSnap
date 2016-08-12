@@ -2,14 +2,21 @@
 
 ## Overview
 
-SynoSnap is a backup snapshot maintaining script designed to have minimal enough requirements that it can run on a Synology NAS without the pain of installing ipkg.
+SynoSnap is a backup snapshot maintaining script designed to have minimal enough requirements that it can run on a Synology NAS without the pain of installing ipkg. Hardlink copying is used to minimize disk space foot print.
 
 ## Requirements
  - Python 2.7+
  - [PyYAML](http://pyyaml.org/) used for YAML parsing.
+ - Linux
+
+## Installation
+ - Download and install PyYAML from [pyyaml.org](http://pyyaml.org/)
+ - Download and extract this project
 
 ## Usage
 Each run updates all snapshots based on current time.
+You should run this script via Chron with a frequency matching the shortest
+time period that you are keeping snapshots for.
 
 **Execute with:**
 ```bash
@@ -17,7 +24,7 @@ Each run updates all snapshots based on current time.
 ```
 **Options:**
 
--r
+--dry-run
 : Dry run (no files will be written to disk)
 
 ## Configuration

@@ -1,48 +1,45 @@
 class SnapshotUpdater:
 	def __init__(self, sourceFolder, destinationFolder, startTime, fileHandler):
-		this.sourceFolder = sourceFolder
-		this.destinationFolder = destinationFolder
-		this.startTime = startTime
-		this.fh = fileHandler
-		this.previousPeriod = null
+		self.sourceFolder = sourceFolder
+		self.destinationFolder = destinationFolder
+		self.startTime = startTime
+		self.fh = fileHandler
+		self.previousPeriod = None
 
-	def process(period):
+	def process(self, period):
 		if period.getNumOfSnapshots() > 0:
-			periodFolder = this.getPeriodFolder(period)
-			if !this.fh.ifFolderExists(periodFolder):
-				this.fh.createFolder(periodFolder)
-				lastUpdateTime = this.startTime
-				if this.previousPeriod == null:
-					this.copySource(periodFolder)
+			periodFolder = self.getPeriodFolder(period)
+			if not self.fh.ifFolderExists(periodFolder):
+				self.fh.createFolder(periodFolder)
+				lastUpdateTime = self.startTime
+				if self.previousPeriod == None:
+					self.copySource(periodFolder)
 			else:
-				lastUpdateTime = this.fh.getTimeStamp(periodFolder)
-			if (this.startTime - lastUpdateTime) > period.getPeriodInSeconds():
-				this.shiftFolders(periodFolder, period.getNumOfSnapshots())
-			this.previousPeriod = period
+				lastUpdateTime = self.fh.getTimeStamp(periodFolder)
+			if (self.startTime - lastUpdateTime) > period.getPeriodInSeconds():
+				self.shiftFolders(periodFolder, period.getNumOfSnapshots())
+			self.previousPeriod = period
 
-	def shiftFolders(periodFolder, numOfSnapshots):
-		entryFolder = this.getEntryFolder(periodFolder, numOfSnapshots -1)
-		this.fh.deleteFolder(entryFolder)
+	def shiftFolders(self, periodFolder, numOfSnapshots):
+		entryFolder = self.getEntryFolder(periodFolder, numOfSnapshots -1)
+		self.fh.deleteFolder(entryFolder)
 		for i in range(numOfSnapshots, 0, -1):
-			entrySrc = this.getEntryFolder(periodFolder, i-1)
-			entryDest = this.getEntryFolder(periodFolder, i)
-			this.fh.moveFolder(entrySrc, entryDest)
-		this.copySource(periodFolder)
+			entrySrc = self.getEntryFolder(periodFolder, i-1)
+			entryDest = self.getEntryFolder(periodFolder, i)
+			self.fh.moveFolder(entrySrc, entryDest)
+		self.copySource(periodFolder)
 
-	def getPeriodFolder(period):
-		return this.fh.joinPaths(this.destinationFolder, period.getName())
+	def getPeriodFolder(self, period):
+		return self.fh.joinPaths(self.destinationFolder, period.getName())
 
-	def getEntryFolder(periodFolder, entryNumber):
-		return this.fh.joinPaths(periodFolder,str(entryNumber))
+	def getEntryFolder(self, periodFolder, entryNumber):
+		return self.fh.joinPaths(periodFolder,str(entryNumber))
 
-	def copySource(periodFolder):
-		copySourceFolder = this.sourceFolder
-		if this.previousPeriod != null:
-			copySourceFolder =
-				this.getEntryFolder(
-					this.getPeriodFolder(this.previousPeriod),
-					0
-				)
-		this.fh.touchFolder(periodFolder, this.startTime)
-		entryFolder = this.getEntryFolder(periodFolder, 0)
-		this.fh.copyFolder(copySourceFolder, entryFolder)
+	def copySource(self, periodFolder):
+		copySourceFolder = self.sourceFolder
+		if self.previousPeriod != None:
+			copySourcePeriodFolder = self.getPeriodFolder(self.previousPeriod)
+			copySourceFolder = self.getEntryFolder(copySourcePeriodFolder, 0)
+		self.fh.touchFolder(periodFolder, self.startTime)
+		entryFolder = self.getEntryFolder(periodFolder, 0)
+		self.fh.copyFolder(copySourceFolder, entryFolder)

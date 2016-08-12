@@ -7,26 +7,26 @@ def main(arguments):
 	configFile = arguments[1];
 	isDryRun   = False
 	for i in range(2, len(arguments)):
-		if arguments[i] == "-r":
+		if arguments[i] == "--dry-run":
 			isDryRun = True
 	stream = file(configFile, 'r')
 	configuration = yaml.load(stream)
 	if isDryRun:
-		fileHandler = fileHandler.DryRunFileHandler()
+		fh = fileHandler.DryRunFileHandler()
 	else:
-		fileHandler = fileHandler.LiveFileHandler()
+		fh = fileHandler.LiveFileHandler()
 	timePeriods = timePeriod.TimePeriod.getTimePeriods()
 	for period in timePeriods:
 		if configuration.has_key(period.getName()):
-			period.setNumOfSnapshots = configuration[period.getName]
-	if !configuration.has_key('output'):
+			period.setNumOfSnapshots(configuration[period.getName()])
+	if not configuration.has_key('destination') or not configuration.has_key('source'):
 		print "Invalid configuration in " + configFile + ". See README.md"
 		return
 	updater = snapshotUpdater.SnapshotUpdater(
 		configuration['source'],
 		configuration['destination'],
-		time.gmTime(),
-		fileHandler
+		int(time.time()),
+		fh
 	)
 	for period in timePeriods:
 		updater.process(period)
