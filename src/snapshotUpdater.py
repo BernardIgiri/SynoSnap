@@ -24,7 +24,7 @@ class SnapshotUpdater:
 		entryFolder = self.getEntryFolder(periodFolder, numOfSnapshots -1)
 		if self.fh.ifFolderExists(entryFolder):
 			self.fh.deleteFolder(entryFolder)
-		for i in range(numOfSnapshots, 0, -1):
+		for i in range(numOfSnapshots -1, 0, -1):
 			entrySrc = self.getEntryFolder(periodFolder, i-1)
 			entryDest = self.getEntryFolder(periodFolder, i)
 			if self.fh.ifFolderExists(entrySrc):
