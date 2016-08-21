@@ -16,7 +16,7 @@ class SnapshotUpdater:
 					self.copySource(periodFolder)
 			else:
 				lastUpdateTime = self.fh.getTimeStamp(periodFolder)
-			if (self.startTime - lastUpdateTime) > period.getPeriodInSeconds():
+			if (self.startTime - lastUpdateTime) >= period.getPeriodInSeconds():
 				self.shiftFolders(periodFolder, period.getNumOfSnapshots())
 			self.previousPeriod = period
 

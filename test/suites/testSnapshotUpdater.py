@@ -48,7 +48,7 @@ class TestSnapshotUpdater(unittest.TestCase):
 		mock_getTimeStamp.return_value = 0
 		sourceFolder = "source"
 		destinationFolder = "snapshots"
-		startTime = 3601
+		startTime = 3600
 		fh = fileHandler.DryRunFileHandler()
 		updater = snapshotUpdater.SnapshotUpdater(sourceFolder, destinationFolder, startTime, fh)
 		updater.process(period)
@@ -100,7 +100,7 @@ class TestSnapshotUpdater(unittest.TestCase):
 		mock_getTimeStamp.return_value = 0
 		sourceFolder = "source"
 		destinationFolder = "snapshots"
-		startTime = 3601
+		startTime = 3600
 		fh = fileHandler.DryRunFileHandler()
 		updater = snapshotUpdater.SnapshotUpdater(sourceFolder, destinationFolder, startTime, fh)
 		updater.process(period)
@@ -164,7 +164,7 @@ class TestSnapshotUpdater(unittest.TestCase):
 		mock_getTimeStamp.return_value = 0
 		sourceFolder = "source"
 		destinationFolder = "snapshots"
-		startTime = 3601
+		startTime = 3600
 		fh = fileHandler.DryRunFileHandler()
 		updater = snapshotUpdater.SnapshotUpdater(sourceFolder, destinationFolder, startTime, fh)
 		updater.process(period1)
@@ -197,7 +197,7 @@ class TestSnapshotUpdater(unittest.TestCase):
 		mock_getTimeStamp.return_value = 0
 		sourceFolder = "source"
 		destinationFolder = "snapshots"
-		startTime = 86401
+		startTime = 86400
 		fh = fileHandler.DryRunFileHandler()
 		updater = snapshotUpdater.SnapshotUpdater(sourceFolder, destinationFolder, startTime, fh)
 		updater.process(period1)
