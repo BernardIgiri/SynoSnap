@@ -6,11 +6,9 @@ SynoSnap is a backup snapshot maintaining script designed to have minimal enough
 
 ## Requirements
  - Python 2.7+
- - [PyYAML](http://pyyaml.org/) used for YAML parsing.
  - Linux
 
 ## Installation
- - Download and install PyYAML from [pyyaml.org](http://pyyaml.org/)
  - Download and extract this project
 
 ## Usage
@@ -28,12 +26,30 @@ time period that you are keeping snapshots for.
 : Dry run (no files will be written to disk)
 
 ## Configuration
-Create a yaml configuration file with the following parameters
-```yaml
-hourly: 0 # number of hourly snapshots to keep
-daily: 0 # number of daily snapshots to keep
-weekly: 0 # number of weekly snapshots to keep
-monthly: 0 # number of monthly snapshots to keep
-source: "" # path to folder generate snapshots of *required
-destination: "" # path to folder to store snapshots *required
+Create a text configuration file in the following format parameters
+```
+hourly      number_of_hourly_snapshots_to_keep
+daily       number_of_hourly_snapshots_to_keep
+weekly      number_of_hourly_snapshots_to_keep
+monthly     number_of_hourly_snapshots_to_keep
+source      path_to_folder_to_generate_snapshots_of
+destination path_to_folder_to_store_snapshots
+```
+At the minimum you should specify source, destination, and at least 1 interval.
+
+Here are a few examples
+```
+hourly      3
+daily       7
+weekly      4
+monthly     6
+source      /home
+destination /snapshots
+```
+
+Minimal Example
+```
+weekly 3
+source /home/
+destination /snapshots/
 ```
